@@ -1,0 +1,15 @@
+FROM centos:7
+
+MAINTAINER Bumjoon Kim <nunojun@gmail.com>
+
+RUN curl -jksSLOH "Cookie: oraclelicense=accept-securebackup-cookie" \
+    http://download.oracle.com/otn-pub/java/jdk/9.0.4+11/c2514751926b4512b076cc82f959763f/jdk-9.0.4_linux-x64_bin.rpm
+RUN yum localinstall -y jdk-9.0.4_linux-x64_bin.rpm
+RUN rm -f jdk-9.0.4_linux-x64_bin.rpm
+ENV JAVA_HOME /usr/java/jdk-9.0.4
+
+RUN curl -jksSLO http://www-us.apache.org/dist/maven/maven-3/3.5.2/binaries/apache-maven-3.5.2-bin.tar.gz
+RUN tar -xzf apache-maven-3.5.2-bin.tar.gz -C /opt
+RUN rm -f apache-maven-3.5.2-bin.tar.gz
+ENV PATH ${PATH}:/opt/apache-maven-3.5.2/bin
+
